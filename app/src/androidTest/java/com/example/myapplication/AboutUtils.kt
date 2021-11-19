@@ -11,9 +11,7 @@ import androidx.test.espresso.contrib.NavigationViewActions
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 
-private fun openAboutViaBottomNav() {
-    onView(withId(R.id.nav_view)).perform(click())
-}
+
 
 private fun openAboutViaDrawer() {
     // Open Drawer to click on navigation.
@@ -26,10 +24,6 @@ private fun openAboutViaDrawer() {
         .perform(NavigationViewActions.navigateTo(R.id.aboutActivity))
 }
 
-private fun openAboutViaOptions() {
-    openContextualActionModeOverflowMenu()
-    onView(withText(R.string.title_about))
-        .perform(click())
-}
+
 
 fun openAbout() = openAboutViaDrawer()

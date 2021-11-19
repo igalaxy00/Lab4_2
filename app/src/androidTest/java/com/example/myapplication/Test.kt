@@ -9,15 +9,18 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.junit.Test
 import org.junit.runner.RunWith
 import android.content.pm.ActivityInfo
+import android.widget.Button
+import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.lifecycle.Lifecycle
 import androidx.test.espresso.Espresso.*
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
-import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import org.junit.Rule
 import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
+import androidx.test.espresso.contrib.DrawerActions
+import androidx.test.espresso.matcher.ViewMatchers.*
+
 import org.junit.Assert
 
 /**
@@ -63,8 +66,33 @@ class Test {
     @get:Rule
     val activityRule = ActivityScenarioRule(MainActivity::class.java)
 
+
+    @Test
+    fun testNavigationUp(){
+        firstExist()
+        onView(withId(R.id.bnToSecond)).perform(click())
+        onView(withContentDescription(R.string.nav_app_bar_navigate_up_description)).check(matches(isDisplayed()))
+        onView(withContentDescription(R.string.nav_app_bar_navigate_up_description)).perform(click())
+        firstExist()
+        onView(withId(R.id.bnToSecond)).perform(click())
+        onView(withId(R.id.bnToThird)).perform(click())
+        onView(withContentDescription(R.string.nav_app_bar_navigate_up_description)).check(matches(isDisplayed()))
+        onView(withContentDescription(R.string.nav_app_bar_navigate_up_description)).perform(click())
+        secondExist()
+        onView(withId(R.id.bnToThird)).perform(click())
+        openAbout()
+        onView(withContentDescription(R.string.nav_app_bar_navigate_up_description)).check(matches(isDisplayed()))
+        onView(withContentDescription(R.string.nav_app_bar_navigate_up_description)).perform(click())
+        onView(withId(R.id.bnToSecond)).perform(click())
+        onView(withContentDescription(R.string.nav_app_bar_navigate_up_description)).check(matches(isDisplayed()))
+        onView(withContentDescription(R.string.nav_app_bar_navigate_up_description)).perform(click())
+        firstExist()
+    }
+
     @Test
     fun firstFragmentTest() {//my test
+
+        //onView(withId(R.id.text_simple)).check(matches(withText("Hello")))
 
         firstExist()
 
@@ -122,6 +150,8 @@ class Test {
 
         secondExist()
     }
+
+
     @Test
     fun thirdFragmentTest() {
         //imitating user activity: getting to the 3rd fragment
@@ -222,11 +252,13 @@ class Test {
         aboutExist()
 
         pressBack()
+
         thirdExist()
 
         openAbout()
         aboutExist()
         pressBack()
+
 
         pressBack()
         secondExist()
@@ -235,12 +267,14 @@ class Test {
         aboutExist()
         pressBack()
 
+
         pressBack()
         firstExist()
 
         openAbout()
         aboutExist()
         pressBack()
+
 
         pressBackUnconditionally()
         Assert.assertTrue(activityRule.scenario.state.isAtLeast(Lifecycle.State.DESTROYED))
