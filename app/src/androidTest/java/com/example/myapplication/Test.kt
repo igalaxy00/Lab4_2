@@ -289,12 +289,14 @@ class Test {
         activityRule.scenario.onActivity { activity ->
             activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         }
+        Thread.sleep(1000)
 
         firstExist()
 
         activityRule.scenario.onActivity { activity ->
             activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         }
+        Thread.sleep(1000)
 
         onView(withId(R.id.bnToSecond)).perform(click())
 
@@ -304,12 +306,14 @@ class Test {
         activityRule.scenario.onActivity { activity ->
             activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         }
+        Thread.sleep(1000)
 
         secondExist()
 
         activityRule.scenario.onActivity { activity ->
             activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         }
+        Thread.sleep(1000)
 
         onView(withId(R.id.bnToThird)).perform(click())
 
@@ -319,13 +323,14 @@ class Test {
         activityRule.scenario.onActivity { activity ->
             activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         }
+        Thread.sleep(1000)
 
         thirdExist()
 
         activityRule.scenario.onActivity { activity ->
             activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         }
-
+        Thread.sleep(1000)
         openAbout()
 
         aboutExist()
@@ -333,14 +338,14 @@ class Test {
         activityRule.scenario.onActivity { activity ->
             activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         }
-
+        Thread.sleep(1000)
         onView(withId(R.id.activity_about)).check(matches(isDisplayed()))
         onView(withId(R.id.tvAbout)).check(matches(isDisplayed()))
 
         activityRule.scenario.onActivity { activity ->
             activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         }
-
+        Thread.sleep(1000)
     }
 
 
